@@ -2,6 +2,7 @@ let currentVoice = 'pNInz6obpgDQGcFmaJgB'; // Default to Adam
 let currentAudio = null;
 let clonedVoices = [];
 let currentCloneId = null;
+let isUsingFallback = false;
 
 // Voice mapping for convenience
 const voiceMap = {
@@ -149,7 +150,15 @@ function updateCloneStatus(message) {
     cloneStatus.textContent = message;
 }
 
-// Speak button
+// Fallback voices for when API fails
+const fallbackVoices = {
+    'en-male': 'en-US-Standard-C',
+    'en-female': 'en-US-Standard-E',
+    'es-male': 'es-ES-Standard-A',
+    'fr-female': 'fr-FR-Standard-C'
+};
+
+// Speak button with improved error handling
 document.getElementById('speakBtn').addEventListener('click', async () => {
     const text = document.getElementById('textInput').value.trim();
     if (!text) {
@@ -160,6 +169,7 @@ document.getElementById('speakBtn').addEventListener('click', async () => {
     try {
         updateStatus('Generating speech...');
         
+        // Try ElevenLabs first
         const result = await websim.textToSpeech({
             text: text,
             voice: currentVoice
@@ -183,8 +193,31 @@ document.getElementById('speakBtn').addEventListener('click', async () => {
         });
 
     } catch (error) {
-        console.error('Error:', error);
-        updateStatus('Error generating speech. Please try again.');
+        console.warn('ElevenLabs API failed, trying fallback...', error);
+        
+        // Fallback to browser's SpeechSynthesis
+        try {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.rate = 1.0;
+            utterance.pitch = 1.0;
+            utterance.volume = 1.0;
+            
+            // Try to match voice characteristics
+            const voices = speechSynthesis.getVoices();
+            const targetVoice = voices.find(v => 
+                v.lang.includes('en') && v.name.toLowerCase().includes('male')
+            ) || voices[0];
+            
+            utterance.voice = targetVoice;
+            speechSynthesis.speak(utterance);
+            
+            updateStatus('Using fallback speech synthesis (ElevenLabs unavailable)');
+            isUsingFallback = true;
+            
+        } catch (fallbackError) {
+            console.error('Fallback also failed:', fallbackError);
+            updateStatus('Error: All speech synthesis methods failed. Please check your connection and try again.');
+        }
     }
 });
 
@@ -194,11 +227,24 @@ document.getElementById('stopBtn').addEventListener('click', () => {
         currentAudio.pause();
         currentAudio = null;
         updateStatus('Stopped');
+    } else if (isUsingFallback) {
+        speechSynthesis.cancel();
+        updateStatus('Stopped');
     }
 });
 
 function updateStatus(message) {
-    document.getElementById('status').textContent = message;
+    const statusEl = document.getElementById('status');
+    statusEl.textContent = message;
+    
+    // Add error styling for error messages
+    if (message.includes('Error') || message.includes('failed')) {
+        statusEl.style.background = 'rgba(255, 107, 107, 0.3)';
+        statusEl.style.color = '#ffcccc';
+    } else {
+        statusEl.style.background = 'rgba(255, 255, 255, 0.1)';
+        statusEl.style.color = 'white';
+    }
 }
 
 // Initialize
