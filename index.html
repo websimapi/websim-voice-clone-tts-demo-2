@@ -19,6 +19,25 @@
         </div>
 
         <div class="section">
+            <h2>Voice Cloning</h2>
+            <p class="description">Upload an audio file to create a voice clone. The audio should be at least 1 minute long for best results.</p>
+            <div class="file-upload">
+                <input type="file" id="voiceFile" accept="audio/*" />
+                <label for="voiceFile" class="file-label">
+                    <span>📁 Choose Audio File</span>
+                </label>
+                <span id="fileName" class="file-name">No file selected</span>
+            </div>
+            <button id="cloneVoiceBtn" disabled>Create Voice Clone</button>
+            <div id="cloneStatus" class="status" style="margin-top: 15px;">Ready to upload audio file</div>
+        </div>
+
+        <div class="section" id="clonedVoicesSection" style="display: none;">
+            <h2>Your Cloned Voices</h2>
+            <div id="clonedVoicesList"></div>
+        </div>
+
+        <div class="section">
             <h2>ElevenLabs Voice IDs (Including Clones)</h2>
             <button class="voice-btn" data-voice="pNInz6obpgDQGcFmaJgB">Adam (Default)</button>
             <button class="voice-btn" data-voice="ErXwobaYiN019PkySvjV">Dorothy</button>
@@ -56,4 +75,3 @@
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4c6229722a6346bc8eb5cb0e5eae5d41","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
-

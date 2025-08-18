@@ -160,6 +160,98 @@ h2 {
     background: rgba(255, 255, 255, 0.1);
 }
 
+.description {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.file-upload {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+#voiceFile {
+    display: none;
+}
+
+.file-label {
+    display: inline-block;
+    padding: 12px 24px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.file-label:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.file-name {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+}
+
+#cloneVoiceBtn {
+    padding: 12px 30px;
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+#cloneVoiceBtn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+#cloneVoiceBtn:disabled {
+    background: rgba(255, 107, 107, 0.5);
+    cursor: not-allowed;
+    transform: none;
+}
+
+.cloned-voice {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24) !important;
+    border-color: rgba(255, 107, 107, 0.5) !important;
+}
+
+.cloned-voice:hover {
+    background: linear-gradient(135deg, #ff5252, #e53e3e) !important;
+}
+
+#clonedVoicesList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+#clonedVoicesSection {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 @media (max-width: 600px) {
     .container {
         padding: 20px;
@@ -174,4 +266,3 @@ h2 {
         align-items: center;
     }
 }
-
