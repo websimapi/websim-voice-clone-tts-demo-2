@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Clone TTS Demo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Voice Clone TTS Demo</h1>
+        
+        <div class="section">
+            <h2>Pre-made Voices</h2>
+            <button class="voice-btn" data-voice="en-male">Male English</button>
+            <button class="voice-btn" data-voice="en-female">Female English</button>
+            <button class="voice-btn" data-voice="es-male">Male Spanish</button>
+            <button class="voice-btn" data-voice="fr-female">Female French</button>
+        </div>
+
+        <div class="section">
+            <h2>ElevenLabs Voice IDs (Including Clones)</h2>
+            <button class="voice-btn" data-voice="pNInz6obpgDQGcFmaJgB">Adam (Default)</button>
+            <button class="voice-btn" data-voice="ErXwobaYiN019PkySvjV">Dorothy</button>
+            <button class="voice-btn" data-voice="TxGEqnHWrfWFTfGW9jX">Josh</button>
+            <button class="voice-btn" data-voice="VR6AewLTigWG4xSOukaG">Arnold</button>
+            
+            <div class="custom-input">
+                <input type="text" id="customVoiceId" placeholder="Enter custom ElevenLabs voice ID">
+                <button id="useCustomVoice">Use Custom Voice</button>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Text to Speak</h2>
+            <textarea id="textInput" placeholder="Enter text to convert to speech...">Hello! This is a demonstration of voice cloning and text-to-speech synthesis using ElevenLabs technology.</textarea>
+        </div>
+
+        <div class="controls">
+            <button id="speakBtn">Speak</button>
+            <button id="stopBtn">Stop</button>
+        </div>
+
+        <div id="status" class="status">Ready</div>
+    </div>
+
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+    <script type="module" src="script.js"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4c6229722a6346bc8eb5cb0e5eae5d41","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
+
